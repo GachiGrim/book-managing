@@ -9,6 +9,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
+    timezone: "+09:00", // 한국 시간(KST),
     dialect: "mariadb",
     pool: {
       max: 10,
@@ -33,7 +34,7 @@ const sequelize = new Sequelize(
   sync() 메서드는 개발 환경에서는 유용하지만, 프로덕션 환경에서는 데이터 손실 위험이 있으므로 마이그레이션 도구(Sequelize CLI의 migrations)를 사용하는 것이 좋습니다.
    */
 // sequelize
-//   .sync({ force: false })
+//   .sync({ force: true })
 //   .then(() => console.log("데이터베이스 테이블이 동기화되었습니다."))
 //   .catch((err) => console.error("테이블 동기화 오류:", err));
 

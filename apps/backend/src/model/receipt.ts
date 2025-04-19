@@ -3,7 +3,7 @@ import { sequelize } from "../dbConnect";
 import { Book } from "./book";
 
 export class Receipt extends Model {
-  declare receiptId: string;
+  declare receiptId: number;
   declare paymentDate: Date;
   declare title: string;
   declare createdAt: Date;
@@ -13,26 +13,22 @@ export class Receipt extends Model {
 Receipt.init(
   {
     receiptId: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     paymentDate: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW, // 현재 시간으로 기본값 설정
     },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    createdAt: {
-      type: DataTypes.TIME,
-    },
   },
   {
     sequelize,
-    timestamps: false,
-    updatedAt: false,
     underscored: true,
   }
 );

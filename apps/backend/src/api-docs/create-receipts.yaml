@@ -1,0 +1,31 @@
+paths:
+  /receipts:
+    post:
+      tags:
+        - "영수증 API"
+      summary: 새 영수증 생성
+      description: 영수증과 관련된 책 정보를 생성합니다.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReceiptDTO"
+      responses:
+        "200":
+          description: 영수증과 책이 성공적으로 생성됨
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  receipt:
+                    $ref: "#/components/schemas/Receipt"
+                  books:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Book"
+        "400":
+          description: 잘못된 요청 형식
+        "500":
+          description: 서버 오류

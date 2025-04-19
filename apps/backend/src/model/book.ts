@@ -16,7 +16,7 @@ Book.init(
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false,
+      autoIncrement: true,
     },
     title: {
       type: DataTypes.STRING,
@@ -28,19 +28,12 @@ Book.init(
     },
     imagePath: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    createdAt: {
-      type: DataTypes.TIME,
-    },
-    updatedAt: {
-      type: DataTypes.TIME,
     },
     receiptId: {
       type: DataTypes.INTEGER,
       references: {
         model: "receipts",
-        key: "receiptId",
+        key: "receipt_id",
       },
       onUpdate: "CASCADE",
       onDelete: "SET NULL",
@@ -48,8 +41,6 @@ Book.init(
   },
   {
     sequelize,
-    timestamps: false,
-    updatedAt: false,
     underscored: true,
   }
 );

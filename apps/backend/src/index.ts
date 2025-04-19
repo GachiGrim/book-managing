@@ -2,9 +2,10 @@ import Koa from "koa";
 import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
 import { dbConnect } from "./dbConnect";
-import { Receipt } from "./model/receipt";
 import BookRouter from "./routes/books";
 import ReceiptRouter from "./routes/receipts";
+import { koaSwagger } from "koa2-swagger-ui";
+import swaggerJsdoc from "swagger-jsdoc";
 
 const app = new Koa();
 const router = new Router();
@@ -13,21 +14,49 @@ const router = new Router();
 app.use(bodyParser());
 dbConnect();
 
+// Swagger 문서 옵션 설정
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "도서-영수증 API 문서",
+      version: "1.0.0",
+      description: "도서-영수증 API 문서",
+    },
+    servers: [
+      {
+        url: "http://localhost:3000",
+        description: "개발 서버",
+      },
+    ],
+  },
+  // API 경로 지정 (JSDoc 주석이 있는 파일들)
+  apis: ["src/api-docs/*.yaml"],
+};
+
 // 라우트
 router.get("/", async (ctx) => {
   ctx.body = { message: "Hello from Koa Backend!" };
 });
 
-router.get("/receipt", async (ctx) => {
-  try {
-    const receipts = await Receipt.findAll();
-    ctx.body = receipts;
-  } catch (err) {
-    console.log(err);
-    ctx.status = 400;
-    ctx.body = { error: "에러" };
-  }
+// Swagger 스펙 생성
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+
+// Swagger UI 설정
+router.get("/swagger.json", async (ctx) => {
+  ctx.body = swaggerSpec;
 });
+
+// Swagger UI 경로 설정
+router.get(
+  "/api-docs",
+  koaSwagger({
+    routePrefix: false,
+    swaggerOptions: {
+      url: "/swagger.json",
+    },
+  })
+);
 
 router.use(BookRouter.routes()).use(BookRouter.allowedMethods());
 router.use(ReceiptRouter.routes()).use(ReceiptRouter.allowedMethods());

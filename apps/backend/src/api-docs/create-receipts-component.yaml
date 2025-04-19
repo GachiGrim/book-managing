@@ -1,0 +1,49 @@
+components:
+  schemas:
+    BookDTO:
+      type: object
+      required:
+        - title
+        - isbn
+      properties:
+        title:
+          type: string
+          description: 책 제목
+        isbn:
+          type: string
+          description: 책의 국제 표준 도서 번호
+    CreateReceiptDTO:
+      type: object
+      required:
+        - title
+        - books
+      properties:
+        title:
+          type: string
+          description: 영수증 이름
+        books:
+          type: array
+          description: 영수증에 포함된 책 목록
+          items:
+            $ref: "#/components/schemas/BookDTO"
+    Receipt:
+      type: object
+      properties:
+        receiptId:
+          type: integer
+          description: 영수증 고유 ID
+        title:
+          type: string
+          description: 영수증 이름
+    Book:
+      type: object
+      properties:
+        title:
+          type: string
+          description: 책 제목
+        isbn:
+          type: string
+          description: 책의 국제 표준 도서 번호
+        receiptId:
+          type: integer
+          description: 연관된 영수증의 ID

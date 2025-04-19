@@ -1,6 +1,8 @@
 import Router from "koa-router";
 import { Receipt } from "../model/receipt";
 import { Book } from "../model/book";
+import { CreateReceiptDTO } from "../dto/CreateReceiptDTO";
+import { sequelize } from "../dbConnect";
 
 const router = new Router({
   prefix: "/receipts",
@@ -9,6 +11,48 @@ const router = new Router({
 router.get("/", async (ctx) => {
   const receipts = await Receipt.findAll();
   ctx.body = { content: receipts };
+});
+
+router.post("/", async (ctx) => {
+  try {
+    const body = ctx.request.body as CreateReceiptDTO;
+
+    const books = body.books;
+    const receiptTitle = body.title;
+
+    // 트랜잭션을 사용하여 모든 작업이 함께 성공하거나 실패하도록 보장
+    const result = await sequelize.transaction(async (transaction) => {
+      // 1. 영수증 먼저 생성
+      const receipt = await Receipt.create(
+        { title: receiptTitle },
+        { transaction }
+      );
+
+      console.log("receipt", receipt);
+      // 2. 책들을 생성하고 영수증 ID를 외래 키로 설정
+      const booksToCreate = books.map((bookDTO) => {
+        return {
+          title: bookDTO.title,
+          isbn: bookDTO.isbn,
+          receiptId: receipt.receiptId, // 외래 키 설정
+        };
+      });
+
+      const createdBooks = await Book.bulkCreate(booksToCreate, {
+        transaction,
+        fields: ["title", "isbn", "receiptId"],
+      });
+      return { receipt, books: createdBooks };
+    });
+    ctx.body = result;
+    ctx.status = 200;
+  } catch (err) {
+    console.log(err);
+    ctx.status = 400;
+    ctx.body = {
+      errorMessage: "생성실패",
+    };
+  }
 });
 
 router.get("/:id", async (ctx) => {
