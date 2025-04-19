@@ -1,14 +1,18 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
-import About from "./pages/About";
+import Books from "./pages/Books";
+import Receipts from "./pages/Receipts";
+import ReceiptDetail from "./pages/ReceiptsDetail";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<h1>fallback</h1>} />
+        <Route path="/books" element={<Books />} />
+        <Route path="/receipts" element={<Receipts />} />
+        <Route path="/receipts/:id" element={<ReceiptDetail />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );
