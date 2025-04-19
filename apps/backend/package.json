@@ -14,13 +14,17 @@
   "packageManager": "pnpm@10.8.1",
   "dependencies": {
     "@koa/cors": "^5.0.0",
+    "@koa/multer": "^3.1.0",
+    "@koa__multer": "link:@types/@koa__multer",
     "@types/swagger-jsdoc": "^6.0.4",
     "dotenv": "^16.5.0",
     "koa": "^2.16.1",
     "koa-bodyparser": "^4.4.1",
     "koa-router": "^13.0.1",
+    "koa-static": "^5.0.0",
     "koa2-swagger-ui": "^5.11.0",
     "mariadb": "^3.4.1",
+    "multer": "link:@types/@koa/multer",
     "sequelize": "^6.37.7",
     "swagger-jsdoc": "^6.2.8"
   },
