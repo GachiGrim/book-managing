@@ -6,5 +6,6 @@ interface BookDTO {
 export interface CreateReceiptDTO {
   /** 영수증 이름 */
   title: string;
+  imagePath: string;
   books: BookDTO[];
 }

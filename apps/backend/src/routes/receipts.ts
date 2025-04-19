@@ -19,16 +19,16 @@ router.post("/", async (ctx) => {
 
     const books = body.books;
     const receiptTitle = body.title;
+    const imagePath = body.imagePath;
 
     // 트랜잭션을 사용하여 모든 작업이 함께 성공하거나 실패하도록 보장
     const result = await sequelize.transaction(async (transaction) => {
       // 1. 영수증 먼저 생성
       const receipt = await Receipt.create(
-        { title: receiptTitle },
+        { title: receiptTitle, imagePath },
         { transaction }
       );
 
-      console.log("receipt", receipt);
       // 2. 책들을 생성하고 영수증 ID를 외래 키로 설정
       const booksToCreate = books.map((bookDTO) => {
         return {
@@ -47,7 +47,6 @@ router.post("/", async (ctx) => {
     ctx.body = result;
     ctx.status = 200;
   } catch (err) {
-    console.log(err);
     ctx.status = 400;
     ctx.body = {
       errorMessage: "생성실패",

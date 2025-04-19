@@ -21,6 +21,9 @@ components:
         title:
           type: string
           description: 영수증 이름
+        imagePath:
+          type: string
+          description: 이미지 경로
         books:
           type: array
           description: 영수증에 포함된 책 목록
