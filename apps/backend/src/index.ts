@@ -4,6 +4,7 @@ import bodyParser from "koa-bodyparser";
 import { dbConnect } from "./dbConnect";
 import BookRouter from "./routes/books";
 import ReceiptRouter from "./routes/receipts";
+import UploadRouter from "./routes/upload";
 import { koaSwagger } from "koa2-swagger-ui";
 import swaggerJsdoc from "swagger-jsdoc";
 
@@ -60,6 +61,7 @@ router.get(
 
 router.use(BookRouter.routes()).use(BookRouter.allowedMethods());
 router.use(ReceiptRouter.routes()).use(ReceiptRouter.allowedMethods());
+router.use(UploadRouter.routes()).use(UploadRouter.allowedMethods());
 
 // 라우터 설정
 app.use(router.routes()).use(router.allowedMethods());
