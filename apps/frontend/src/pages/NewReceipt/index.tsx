@@ -3,9 +3,9 @@ import Layout from "@components/Layout";
 import PageTitle from "@components/PageTitle";
 import { useHandleNewReceipt } from "@hooks/NewReceipt/useHandleNewReceipt";
 
-import ImageUploader from "./base/ImageUploader";
 import ReceiptName from "./fields/ReceiptName";
 import PurchaseBook from "./fields/PurchaseBook";
+import ReceiptImageUploader from "./fields/ReceiptImageUploader";
 
 export default function NewReceipt() {
   const { books, handleAddBookClick, methods } = useHandleNewReceipt();
@@ -19,9 +19,7 @@ export default function NewReceipt() {
             {/* 영수증 기본 정보 */}
             <div className="bg-white rounded-xl p-4 shadow mb-6">
               <ReceiptName />
-              <div className="mb-4">
-                <ImageUploader />
-              </div>
+              <ReceiptImageUploader />
             </div>
             {/* 책 검색 및 추가 */}
             <div className="bg-white rounded-xl p-4 shadow mb-6">
