@@ -4,6 +4,7 @@ import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
 import serve from "koa-static";
 import mount from "koa-mount";
+import cors from "@koa/cors";
 import { dbConnect } from "./dbConnect";
 import BookRouter from "./routes/books";
 import ReceiptRouter from "./routes/receipts";
@@ -17,6 +18,11 @@ const router = new Router();
 
 // 미들웨어
 app.use(bodyParser());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(mount("/static/uploads", serve(path.join(cwd(), "uploads"))));
 dbConnect();
 
