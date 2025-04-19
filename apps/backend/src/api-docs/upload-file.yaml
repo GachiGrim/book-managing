@@ -1,0 +1,115 @@
+paths:
+  /upload:
+    post:
+      summary: 이미지 업로드
+      description: 단일 이미지 파일을 서버에 업로드합니다.
+      tags:
+        - 이미지
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: 업로드할 이미지 파일
+              required:
+                - image
+      responses:
+        "200":
+          description: 이미지 업로드 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    description: 요청 처리 성공 여부
+                  message:
+                    type: string
+                    example: 이미지 업로드 성공
+                    description: 응답 메시지
+                  data:
+                    type: object
+                    properties:
+                      filename:
+                        type: string
+                        example: 1650123456789-123456789.jpg
+                        description: 서버에 저장된 파일명
+                      originalName:
+                        type: string
+                        example: profile.jpg
+                        description: 원본 파일명
+                      mimetype:
+                        type: string
+                        example: image/jpeg
+                        description: 파일의 MIME 타입
+                      size:
+                        type: integer
+                        example: 124580
+                        description: 파일 크기(바이트)
+                      path:
+                        type: string
+                        example: /uploads/1650123456789-123456789.jpg
+                        description: 파일에 접근 가능한 경로
+        "400":
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 이미지가 제공되지 않았습니다.
+        "500":
+          description: 서버 오류
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: 업로드 실패
+
+components:
+  schemas:
+    UploadResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: 요청 처리 성공 여부
+        message:
+          type: string
+          description: 응답 메시지
+        data:
+          type: object
+          properties:
+            filename:
+              type: string
+              description: 서버에 저장된 파일명
+            originalName:
+              type: string
+              description: 원본 파일명
+            mimetype:
+              type: string
+              description: 파일의 MIME 타입
+            size:
+              type: integer
+              description: 파일 크기(바이트)
+            path:
+              type: string
+              description: 파일에 접근 가능한 경로
