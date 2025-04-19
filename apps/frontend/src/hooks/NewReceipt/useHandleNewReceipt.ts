@@ -24,7 +24,6 @@ export const useHandleNewReceipt = () => {
 
   async function submit(data: FormTypes) {
     if (!data.receiptName) {
-      console.log("????");
       toastUtil.alert.error("영수증 이름을 입력해주세요.");
       return;
     }
