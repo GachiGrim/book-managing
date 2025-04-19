@@ -3,9 +3,15 @@ import PageTitle from "@components/PageTitle";
 import { useState } from "react";
 import SearchInput from "./SearchInput";
 import Book from "./Book";
+import { useBookQueries } from "@hooks/queries/bookQuries";
 
 export default function Books() {
   const [searchInput, setSearchInput] = useState("");
+
+  const { data } = useBookQueries();
+
+  console.log(data);
+
   const books = [
     {
       id: 1,

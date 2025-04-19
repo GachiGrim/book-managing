@@ -5,7 +5,6 @@ export class Book extends Model {
   declare id: number;
   declare title: string;
   declare isbn: string;
-  declare imagePath: string;
   declare createdAt: Date | null;
   declare updatedAt: Date | null;
   declare receiptId: ForeignKey<number> | null;
