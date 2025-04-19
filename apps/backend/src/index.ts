@@ -1,6 +1,8 @@
+import dotenv from "dotenv";
 import Koa from "koa";
 import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
+dotenv.config();
 
 const app = new Koa();
 const router = new Router();
@@ -17,7 +19,7 @@ router.get("/", async (ctx) => {
 app.use(router.routes()).use(router.allowedMethods());
 
 // 서버 시작
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
