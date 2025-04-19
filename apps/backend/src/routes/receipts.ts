@@ -15,7 +15,7 @@ router.get("/:id", async (ctx) => {
   try {
     const receipt = await Receipt.findOne({
       where: {
-        id: ctx.params.id,
+        receipt_id: ctx.params.id,
       },
       include: [
         {
@@ -29,8 +29,9 @@ router.get("/:id", async (ctx) => {
       ],
     });
 
-    ctx.body = { receipt, books: (receipt as any)?.books || [] };
+    ctx.body = { receipt, books: receipt?.books || [] };
   } catch (err) {
+    console.log(err);
     ctx.status = 400;
     ctx.body = { error: "err" };
   }

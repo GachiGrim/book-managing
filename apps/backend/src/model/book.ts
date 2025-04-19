@@ -1,8 +1,17 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, ForeignKey, Model } from "sequelize";
 import { sequelize } from "../dbConnect";
 
-export const Book = sequelize.define(
-  "books",
+export class Book extends Model {
+  declare id: number;
+  declare title: string;
+  declare isbn: string;
+  declare imagePath: string;
+  declare createdAt: Date | null;
+  declare updatedAt: Date | null;
+  declare receiptId: ForeignKey<number> | null;
+}
+
+Book.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -31,13 +40,14 @@ export const Book = sequelize.define(
       type: DataTypes.INTEGER,
       references: {
         model: "receipts",
-        key: "receipt_id",
+        key: "receiptId",
       },
       onUpdate: "CASCADE",
       onDelete: "SET NULL",
     },
   },
   {
+    sequelize,
     timestamps: false,
     updatedAt: false,
     underscored: true,
