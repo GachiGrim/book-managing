@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:backend": "pnpm --filter @book-library-app/backend run dev",
+    "build:backend": "pnpm --filter @book-library-app/backend run build",
+    "dev:frontend": "pnpm --filter @book-library-app/frontend run dev",
+    "build:frontend": "pnpm --filter @book-library-app/frontend run build",
+    "preview:frontend": "pnpm --filter @book-library-app/frontend run preview",
+    "dev": "pnpm -r run dev",
+    "build": "pnpm -r run build"
   },
   "keywords": [],
   "author": "",
