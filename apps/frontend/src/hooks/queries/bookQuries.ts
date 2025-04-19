@@ -5,6 +5,6 @@ import { fetchAllBooks } from "@api/books";
 export const useBookQueries = () => {
   return useQuery({
     queryKey: bookQueryKey.all.queryKey,
-    queryFn: fetchAllBooks,
+    queryFn: () => fetchAllBooks(),
   });
 };

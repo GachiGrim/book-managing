@@ -1,10 +1,12 @@
 import { instance } from "../shared/instance";
 import { AllReceiptsResponse, ReceiptDetailResponse } from "./type";
 
-export function fetchAllReceipts() {
-  return instance.get<AllReceiptsResponse>("/receipts");
+export function fetchAllReceipts(): Promise<AllReceiptsResponse> {
+  return instance.get("/receipts");
 }
 
-export function fetReceiptDetail(receiptId: string) {
-  return instance.get<ReceiptDetailResponse>(`/receipts/${receiptId}`);
+export function fetReceiptDetail(
+  receiptId: string
+): Promise<ReceiptDetailResponse> {
+  return instance.get(`/receipts/${receiptId}`);
 }

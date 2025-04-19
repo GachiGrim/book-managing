@@ -9,6 +9,7 @@ export default function Books() {
   const [searchInput, setSearchInput] = useState("");
 
   const { data } = useBookQueries();
+  console.log("data", data);
 
   console.log(data);
 
