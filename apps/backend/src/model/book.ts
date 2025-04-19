@@ -26,9 +26,6 @@ Book.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    imagePath: {
-      type: DataTypes.STRING,
-    },
     receiptId: {
       type: DataTypes.INTEGER,
       references: {

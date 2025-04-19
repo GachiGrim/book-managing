@@ -26,6 +26,9 @@ Receipt.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    imagePath: {
+      type: DataTypes.STRING,
+    },
   },
   {
     sequelize,
