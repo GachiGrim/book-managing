@@ -1,18 +1,23 @@
 import Koa from "koa";
+import path from "path";
 import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
+import serve from "koa-static";
+import mount from "koa-mount";
 import { dbConnect } from "./dbConnect";
 import BookRouter from "./routes/books";
 import ReceiptRouter from "./routes/receipts";
 import UploadRouter from "./routes/upload";
 import { koaSwagger } from "koa2-swagger-ui";
 import swaggerJsdoc from "swagger-jsdoc";
+import { cwd } from "process";
 
 const app = new Koa();
 const router = new Router();
 
 // 미들웨어
 app.use(bodyParser());
+app.use(mount("/static/uploads", serve(path.join(cwd(), "uploads"))));
 dbConnect();
 
 // Swagger 문서 옵션 설정
