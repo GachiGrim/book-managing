@@ -1,7 +1,11 @@
-import { fetchAllReceipts, fetReceiptDetail } from "@api/receipts";
+import {
+  createNewReceipt,
+  fetchAllReceipts,
+  fetReceiptDetail,
+} from "@api/receipts";
 import { receiptQueryKey } from "@hooks/queryKey";
 import { ReceiptUIType } from "@ui-types/receipts";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import dayjs from "dayjs";
 import { useParams } from "@hooks/useParams";
@@ -41,4 +45,14 @@ export const useReceiptDetailQuery = () => {
       };
     },
   });
+};
+
+export const useCreateReceipt = () => {
+  const { mutateAsync } = useMutation({
+    mutationFn: createNewReceipt,
+  });
+
+  return {
+    handleCreateReceipt: mutateAsync,
+  };
 };

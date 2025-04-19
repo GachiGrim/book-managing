@@ -15,3 +15,9 @@ export interface AllReceiptsResponse {
 export type ReceiptDetailResponse = Receipt & {
   books: Book[];
 };
+
+export interface CreateReceiptParams {
+  title: string;
+  imagePath: string;
+  books: { title: string; isbn: string }[];
+}

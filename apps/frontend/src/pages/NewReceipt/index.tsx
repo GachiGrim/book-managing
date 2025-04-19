@@ -8,14 +8,15 @@ import PurchaseBook from "./fields/PurchaseBook";
 import ReceiptImageUploader from "./fields/ReceiptImageUploader";
 
 export default function NewReceipt() {
-  const { books, handleAddBookClick, methods } = useHandleNewReceipt();
+  const { books, handleAddBookClick, methods, handleSubmit } =
+    useHandleNewReceipt();
 
   return (
     <Layout>
       <PageTitle>영수증 등록</PageTitle>
       <div className="p-4">
         <FormProvider {...methods}>
-          <form onSubmit={() => {}}>
+          <form onSubmit={handleSubmit}>
             {/* 영수증 기본 정보 */}
             <div className="bg-white rounded-xl p-4 shadow mb-6">
               <ReceiptName />
