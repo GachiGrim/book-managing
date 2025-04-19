@@ -3,6 +3,8 @@ import Router from "koa-router";
 import bodyParser from "koa-bodyparser";
 import { dbConnect } from "./dbConnect";
 import { Receipt } from "./model/receipt";
+import BookRouter from "./routes/books";
+import ReceiptRouter from "./routes/receipts";
 
 const app = new Koa();
 const router = new Router();
@@ -26,6 +28,9 @@ router.get("/receipt", async (ctx) => {
     ctx.body = { error: "에러" };
   }
 });
+
+router.use(BookRouter.routes()).use(BookRouter.allowedMethods());
+router.use(ReceiptRouter.routes()).use(ReceiptRouter.allowedMethods());
 
 // 라우터 설정
 app.use(router.routes()).use(router.allowedMethods());
