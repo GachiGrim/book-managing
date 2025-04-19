@@ -1,12 +1,11 @@
+import { ReceiptUIType } from "@ui-types/receipts";
 import { Link } from "react-router-dom";
 
-interface Props {
-  id: number;
-  title: string;
-  date: string;
-}
-
-export default function Receipt({ id, date, title }: Props) {
+export default function Receipt({
+  id,
+  date,
+  title,
+}: Pick<ReceiptUIType, "id" | "date" | "title">) {
   return (
     <Link to={`/receipts/${id}`}>
       <div className="bg-white rounded-xl p-4 shadow">

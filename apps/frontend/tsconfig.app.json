@@ -25,7 +25,9 @@
     "paths": {
       "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@api/*": ["src/api/*"]
+      "@api/*": ["src/api/*"],
+      "@ui-types/*": ["src/ui-types/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": ["src"]

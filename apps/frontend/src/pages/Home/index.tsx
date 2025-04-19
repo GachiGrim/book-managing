@@ -1,8 +1,9 @@
 import Layout from "@components/Layout";
+import PageTitle from "@components/PageTitle";
+
 import MoveLink from "./MoveLink";
 import BookIcon from "./icons/BookIcon";
 import ReceiptIcon from "./icons/ReceiptIcon";
-import PageTitle from "@components/PageTitle";
 
 const Home = () => {
   return (

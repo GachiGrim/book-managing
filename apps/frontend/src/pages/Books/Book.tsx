@@ -1,9 +1,6 @@
-interface Props {
-  title: string;
-  purchaseDate: string;
-}
+import { BookUIType } from "@ui-types/books";
 
-export default function Book({ purchaseDate, title }: Props) {
+export default function Book({ purchaseDate, title }: BookUIType) {
   return (
     <div className="bg-white rounded-xl p-4 shadow flex">
       <div className="w-16 h-24 bg-gray-200 rounded flex items-center justify-center mr-4">

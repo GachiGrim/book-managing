@@ -5,6 +5,7 @@ interface Receipt {
   paymentDate: string;
   title: string;
   createdAt: string;
+  imagePath: string;
 }
 
 export interface AllReceiptsResponse {

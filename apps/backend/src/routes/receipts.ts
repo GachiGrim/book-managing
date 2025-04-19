@@ -78,7 +78,7 @@ router.get("/:id", async (ctx) => {
       return;
     }
 
-    ctx.body = { receipt, books: receipt?.books || [] };
+    ctx.body = receipt;
   } catch (err) {
     ctx.status = 400;
     ctx.body = { error: "요청이 잘못되었습니다." };
