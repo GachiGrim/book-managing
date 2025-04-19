@@ -16,9 +16,6 @@ importers:
       '@koa/multer':
         specifier: ^3.1.0
         version: 3.1.0(multer@1.4.5-lts.2)
-      '@koa__multer':
-        specifier: link:@types/@koa__multer
-        version: link:@types/@koa__multer
       '@types/swagger-jsdoc':
         specifier: ^6.0.4
         version: 6.0.4
@@ -43,9 +40,6 @@ importers:
       mariadb:
         specifier: ^3.4.1
         version: 3.4.1
-      multer:
-        specifier: link:@types/@koa/multer
-        version: 1.4.5-lts.2
       sequelize:
         specifier: ^6.37.7
         version: 6.37.7(mariadb@3.4.1)
