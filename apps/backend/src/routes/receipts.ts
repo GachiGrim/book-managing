@@ -29,11 +29,16 @@ router.get("/:id", async (ctx) => {
       ],
     });
 
+    if (!receipt) {
+      ctx.status = 404;
+      ctx.body = { error: "존재하지 않는 영수증번호입니다." };
+      return;
+    }
+
     ctx.body = { receipt, books: receipt?.books || [] };
   } catch (err) {
-    console.log(err);
     ctx.status = 400;
-    ctx.body = { error: "err" };
+    ctx.body = { error: "요청이 잘못되었습니다." };
   }
 });
 
