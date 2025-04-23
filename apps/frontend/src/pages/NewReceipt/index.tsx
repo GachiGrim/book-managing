@@ -2,6 +2,7 @@ import { FormProvider } from "react-hook-form";
 import Layout from "@components/Layout";
 import PageTitle from "@components/PageTitle";
 import { useHandleNewReceipt } from "@hooks/NewReceipt/useHandleNewReceipt";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 import ReceiptName from "./fields/ReceiptName";
 import PurchaseBook from "./fields/PurchaseBook";
@@ -24,20 +25,23 @@ export default function NewReceipt() {
             </div>
             {/* 책 검색 및 추가 */}
             <div className="bg-white rounded-xl p-4 shadow mb-6">
-              <h3 className="font-medium text-lg mb-4">구매한 도서</h3>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="font-medium text-lg">구매한 도서</h3>
+                <button
+                  type="button"
+                  className="flex items-center gap-1 bg-green-400 hover:bg-green-500 text-white font-medium py-2 px-3 rounded-md transition duration-200"
+                  onClick={handleAddBookClick}
+                >
+                  <PlusIcon className="h-5 w-5" />
+                  <span>추가</span>
+                </button>
+              </div>
               {books.map((book, index) => (
                 <PurchaseBook key={book.id} index={index} />
               ))}
             </div>
             {/* 제출 버튼 */}
             <div className="grid grid-cols-1 gap-1">
-              <button
-                type="button"
-                className="w-full bg-green-400 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-md transition duration-200"
-                onClick={handleAddBookClick}
-              >
-                도서 목록 추가하기
-              </button>
               <button
                 type="submit"
                 className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-md transition duration-200"
