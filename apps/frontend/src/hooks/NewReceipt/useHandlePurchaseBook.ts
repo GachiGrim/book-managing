@@ -9,15 +9,8 @@ export const useHandlePurchaseBook = (index: number) => {
     name: `books.${index}.title`,
   });
 
-  const { field: isbn } = useController({
-    control,
-    name: `books.${index}.isbn`,
-  });
-
   return {
     title: title.value,
     handleTitleChange: title.onChange,
-    isbn: isbn.value,
-    handleIsbnChange: isbn.onChange,
   };
 };

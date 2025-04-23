@@ -10,7 +10,7 @@ export const useHandleNewReceipt = () => {
     defaultValues: {
       receiptName: "",
       receiptImagePath: "",
-      books: [{ title: "", isbn: "" }],
+      books: [{ title: "" }],
     },
   });
   const { control } = methods;
@@ -19,7 +19,7 @@ export const useHandleNewReceipt = () => {
   const { handleCreateReceipt } = useCreateReceipt();
 
   function handleAddBookClick() {
-    append({ isbn: "", title: "" });
+    append({ title: "" });
   }
 
   async function submit(data: FormTypes) {
@@ -32,7 +32,7 @@ export const useHandleNewReceipt = () => {
       imagePath: data.receiptImagePath,
       books: data.books
         .filter((item) => Boolean(item.title))
-        .map((item) => item),
+        .map((item) => ({ ...item, isbn: "" })),
     });
     toastUtil.alert.success("영수증 등록에 성공했습니다.");
     navigate("/");

@@ -1,6 +1,5 @@
 type Book = {
   title: string;
-  isbn: string;
 };
 
 export type FormTypes = {
