@@ -3,6 +3,7 @@ import Layout from "@components/Layout";
 import PageTitle from "@components/PageTitle";
 import { useHandleNewReceipt } from "@hooks/NewReceipt/useHandleNewReceipt";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { useEffect, useRef } from "react";
 
 import ReceiptName from "./fields/ReceiptName";
 import PurchaseBook from "./fields/PurchaseBook";
@@ -11,6 +12,16 @@ import ReceiptImageUploader from "./fields/ReceiptImageUploader";
 export default function NewReceipt() {
   const { books, handleAddBookClick, methods, handleSubmit } =
     useHandleNewReceipt();
+  const lastBookRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (lastBookRef.current) {
+      const input = lastBookRef.current.querySelector("input");
+      if (input) {
+        input.focus();
+      }
+    }
+  }, [books.length]);
 
   return (
     <Layout>
@@ -37,7 +48,12 @@ export default function NewReceipt() {
                 </button>
               </div>
               {books.map((book, index) => (
-                <PurchaseBook key={book.id} index={index} />
+                <div
+                  key={book.id}
+                  ref={index === books.length - 1 ? lastBookRef : null}
+                >
+                  <PurchaseBook index={index} />
+                </div>
               ))}
             </div>
             {/* 제출 버튼 */}
