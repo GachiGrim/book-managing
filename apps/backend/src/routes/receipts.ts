@@ -85,4 +85,37 @@ router.get("/:id", async (ctx) => {
   }
 });
 
+router.delete("/:id", async (ctx) => {
+  try {
+    const receiptId = ctx.params.id;
+
+    // 트랜잭션을 사용하여 영수증과 관련된 책들을 함께 삭제
+    await sequelize.transaction(async (transaction) => {
+      // 1. 관련된 책들 먼저 삭제
+      await Book.destroy({
+        where: { receiptId },
+        transaction,
+      });
+
+      // 2. 영수증 삭제
+      const deletedCount = await Receipt.destroy({
+        where: { receiptId },
+        transaction,
+      });
+
+      if (deletedCount === 0) {
+        ctx.status = 404;
+        ctx.body = { error: "존재하지 않는 영수증번호입니다." };
+        return;
+      }
+    });
+
+    ctx.status = 200;
+    ctx.body = { message: "영수증이 성공적으로 삭제되었습니다." };
+  } catch (err) {
+    ctx.status = 400;
+    ctx.body = { error: "요청이 잘못되었습니다." };
+  }
+});
+
 export default router;

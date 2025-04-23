@@ -29,3 +29,41 @@ paths:
           description: 잘못된 요청 형식
         "500":
           description: 서버 오류
+  /receipts/{id}:
+    delete:
+      tags:
+        - "영수증 API"
+      summary: 영수증 삭제
+      description: 영수증과 관련된 모든 책 정보를 삭제합니다.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 삭제할 영수증 ID
+      responses:
+        "200":
+          description: 영수증이 성공적으로 삭제됨
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "영수증이 성공적으로 삭제되었습니다."
+        "404":
+          description: 존재하지 않는 영수증
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "존재하지 않는 영수증번호입니다."
+        "400":
+          description: 잘못된 요청 형식
+        "500":
+          description: 서버 오류
